@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+     <meta charset="UTF-8" />
+     <link rel="stylesheet" type="text/css" href="style.css">
+     <title>Prueba :p</title>
+</head>
+<body>
+    
+    <div class="main-content">
+        <div class="top-banner">
+         <img src="cat" alt="AAA"  />
+         <h2>  This is the Header</h2>
+        </div>
+        <div class="division">Block </div>
+        <!-- Block 1-->
+         <div class="block" data-id={id}>
+            <img src="img.jpg" alt="AAA" class="block__img" />
+            <div class="block__content">
+                <h2 class="block__title">This is a block</h2>
+                <p class="block__text">content goes .</p>
+            </div>
+        </div>
+        <div class="division">Block </div>
+        <!-- Block 2-->
+        <div class="block" data-id={id}>
+            <div class="block__content">
+                <h2 class="block__title">This is a block</h2>
+                <p class="block__text">content goes .</p>
+            </div>
+             <img src="img.jpg" alt="AAA" class="block__img" />
+        </div>
+        <div class="division">Block </div>
+        <!-- Block 3-->
+        <div class="block footer" data-id={id}>
+            <h2 class="block__title">This is a block</h2>
+            <div class="block__footer">
+                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                <p class="block__text">content goes .</p>
+            </div>
+            <div class="block__footer">
+                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                <p class="block__text">content goes .</p>
+            </div>
+            <div class="block__footer">
+                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                <p class="block__text">content goes .</p>
+            </div>
+
+        </div>
+        <div class="division"></div>
+        <div class="block">
+            <h2 class="block__title">This is a block</h2>
+            <div class="carousel">
+                <!-- Radio buttons to control slides -->
+                <input type="radio" name="radio-btn" id="radio1" checked>
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+
+                <!-- Slides wrapper -->
+                <div class="slides">
+                    <div class="slide">
+                        <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                         <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                          <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                         <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                         <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                          <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                         <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                         <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                          <div class="block__content">
+                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
+                            <p class="block__text">content goes .</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual navigation -->
+                <div class="navigation-manual">
+                    <label for="radio1" class="manual-btn"></label>
+                    <label for="radio2" class="manual-btn"></label>
+                    <label for="radio3" class="manual-btn"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar"></div>
+</body>
+<script>
+function updateBlock() {
+  const index = parseInt(document.getElementById("block-select").value);
+  const newText = document.getElementById("new-text").value;
+  const newImg = document.getElementById("new-img").value;
+
+  const blocks = [
+    document.querySelectorAll(".block")[0],
+    document.querySelectorAll(".block")[1],
+    document.querySelectorAll(".block__footer")[0],
+    document.querySelectorAll(".block__footer")[1],
+    document.querySelectorAll(".block__footer")[2]
+  ];
+
+  const block = blocks[index];
+  const img = block.querySelector("img");
+  const text = block.querySelector(".block__text");
+
+  if (newText) text.textContent = newText;
+  if (newImg) img.src = newImg;
+}
+</script>
+</html>
