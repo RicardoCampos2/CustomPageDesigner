@@ -9,16 +9,39 @@
     
     <div class="main-content">
         <div class="top-banner">
-         <img src="cat" alt="AAA"  />
+         <img src="cat.png" alt="AAA"  />
          <h2>  This is the Header</h2>
         </div>
         <div class="division">Block </div>
         <!-- Block 1-->
-         <div class="block" data-id={id}>
-            <img src="img.jpg" alt="AAA" class="block__img" />
-            <div class="block__content">
-                <h2 class="block__title">This is a block</h2>
-                <p class="block__text">content goes .</p>
+        <div id="block1" class="block" data-id="block1">
+            <div class="container" id="container1">
+                <div class="container"id="container1-1">
+                <button class="add-placeholder">
+                    <img src="add.png" alt="Add">
+                </button>
+                </div>
+                <div class="container vertical"id="container1-2">
+                <button class="add-placeholder">
+                    <img src="add.png" alt="Add">
+                </button>
+                <button class="add-placeholder">
+                    <img src="add.png" alt="Add">
+                </button>
+                </div>
+            </div>
+            <div class="container vertical" id="container2">
+                <button class="add-placeholder">
+                <img src="add.png" alt="Add">
+                </button>
+                <div class="container">
+                <button class="add-placeholder">
+                    <img src="add.png" alt="Add">
+                </button>
+                <button class="add-placeholder">
+                    <img src="add.png" alt="Add">
+                </button>
+                </div>
             </div>
         </div>
         <div class="division">Block </div>
@@ -111,29 +134,193 @@
                 </div>
             </div>
         </div>
+        <div class="block">
+        <div class="block__title">Titulo</div>
+        </div>
     </div>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+        <h3>Add Elements</h3>
+        <!-- existing controls -->
+        <select id="element-type">
+            <option value="">Select type</option>
+            <option value="title">Title</option>
+            <option value="text">Text</option>
+            <option value="image">Image</option>
+            <option value="container">Container</option>
+        </select>
+        <input type="text" id="element-text" placeholder="Enter text" style="display:none;" />
+        <input type="file" id="element-image" accept="image/*" style="display:none;" />
+        <button onclick="insertElement()">Insert Element</button>
+
+         <h3>Page Tree</h3>
+        <div id="tree-box">
+            <ul id="dom-tree"></ul>
+        </div>
+    </div>
+   
+
 </body>
 <script>
-function updateBlock() {
-  const index = parseInt(document.getElementById("block-select").value);
-  const newText = document.getElementById("new-text").value;
-  const newImg = document.getElementById("new-img").value;
+let elementCounter = 0;
+let selectedPlaceholder = null;
 
-  const blocks = [
-    document.querySelectorAll(".block")[0],
-    document.querySelectorAll(".block")[1],
-    document.querySelectorAll(".block__footer")[0],
-    document.querySelectorAll(".block__footer")[1],
-    document.querySelectorAll(".block__footer")[2]
-  ];
+function generateId(type) {
+  elementCounter++;
+  return `${type}-${elementCounter}`;
+}
 
-  const block = blocks[index];
-  const img = block.querySelector("img");
-  const text = block.querySelector(".block__text");
+// Select a placeholder when clicked
+document.addEventListener("click", function(e) {
+  if (e.target.closest(".add-placeholder")) {
+    if (selectedPlaceholder) {
+      selectedPlaceholder.classList.remove("selected");
+    }
+    selectedPlaceholder = e.target.closest(".add-placeholder");
+    selectedPlaceholder.classList.add("selected");
+  }
+});
 
-  if (newText) text.textContent = newText;
-  if (newImg) img.src = newImg;
+// Show/hide inputs based on sidebar dropdown
+document.getElementById("element-type").addEventListener("change", function() {
+  const type = this.value;
+  document.getElementById("element-text").style.display = (type === "text" || type === "title") ? "block" : "none";
+  document.getElementById("element-image").style.display = (type === "image") ? "block" : "none";
+});
+document.addEventListener("DOMContentLoaded", buildTree);
+
+// Insert element into selected placeholder
+function insertElement() {
+  if (!selectedPlaceholder) {
+    alert("Select a placeholder button inside a block first.");
+    return;
+  }
+
+  const type = document.getElementById("element-type").value;
+  const textVal = document.getElementById("element-text").value;
+  const fileInput = document.getElementById("element-image");
+
+  let newEl;
+
+  switch(type) {
+    case "title":
+      newEl = document.createElement("h2");
+      newEl.className = "block__title";
+      newEl.id = generateId("title");
+      newEl.textContent = textVal || "New Title";
+      break;
+
+    case "text":
+      newEl = document.createElement("p");
+      newEl.className = "block__text";
+      newEl.id = generateId("text");
+      newEl.textContent = textVal || "New Text";
+      break;
+
+    case "image":
+      newEl = document.createElement("img");
+      newEl.className = "block__img";
+      newEl.id = generateId("image");
+      if (fileInput.files[0]) {
+        newEl.src = URL.createObjectURL(fileInput.files[0]);
+      } else {
+        newEl.src = "img.jpg";
+      }
+      newEl.alt = "New Image";
+      break;
+
+    case "container":
+        newEl = document.createElement("div");
+        newEl.className = "container";
+        newEl.id = generateId("container");
+
+        // add the placeholder button inside
+        const placeholderBtn = document.createElement("button");
+        placeholderBtn.className = "add-placeholder";
+        placeholderBtn.innerHTML = '<img src="add.png" alt="Add">';
+        const placeholderBtn2 = document.createElement("button");
+        placeholderBtn2.className = "add-placeholder";
+        placeholderBtn2.innerHTML = '<img src="add.png" alt="Add">';
+        newEl.appendChild(placeholderBtn);
+        newEl.appendChild(placeholderBtn2);
+
+        break;
+  }
+
+  if (newEl) {
+    selectedPlaceholder.replaceWith(newEl);
+    buildTree();
+    selectedPlaceholder = null; // reset
+  }
+  
+}
+function buildTree() {
+  const treeRoot = document.getElementById("dom-tree");
+  treeRoot.innerHTML = "";
+
+  const mainContent = document.querySelector(".main-content");
+
+ function createNode(el, parentUl) {
+
+  const li = document.createElement("li");
+
+  // header row
+  const header = document.createElement("div");
+  header.className = "tree-node";
+
+  const label = document.createElement("button");
+  label.textContent = `${el.className} (${el.id || "no-id"})`;
+  label.onclick = () => {
+    if (selectedPlaceholder) selectedPlaceholder.classList.remove("selected");
+    selectedPlaceholder = el;
+    el.classList.add("selected");
+  };
+
+  header.appendChild(label);
+  li.appendChild(header);
+  parentUl.appendChild(li);
+
+  // children
+  const children = el.querySelectorAll(":scope > .container, :scope > .block",);
+  const components = el.querySelectorAll(":scope > .block__text, :scope > .block__Title, :scope > .block__img",);
+  
+  if (children.length > 0) {
+    const toggle = document.createElement("span");
+    toggle.className = "tree-toggle";
+    header.insertBefore(toggle, label);
+    
+    const ul = document.createElement("ul");
+    li.appendChild(ul);
+
+    children.forEach(child => createNode(child, ul));
+
+    toggle.onclick = () => {
+      const isOpen = toggle.classList.toggle("open");
+      ul.classList.toggle("hidden", !isOpen);
+    };
+
+    ul.classList.add("hidden"); // start collapsed
+  }
+  if (components.length > 0) {
+    const toggle = document.createElement("span");
+    toggle.className = "tree-toggle";
+    header.insertBefore(toggle, label);
+    
+    const ul = document.createElement("ul");
+    li.appendChild(ul);
+
+    components.forEach(child => createNode(child, ul));
+
+    toggle.onclick = () => {
+      const isOpen = toggle.classList.toggle("open");
+      ul.classList.toggle("hidden", !isOpen);
+    };
+
+    ul.classList.add("hidden"); // start collapsed
+  }
+}
+
+  const blocks = mainContent.querySelectorAll(".block");
+  blocks.forEach(block => createNode(block, treeRoot));
 }
 </script>
 </html>
