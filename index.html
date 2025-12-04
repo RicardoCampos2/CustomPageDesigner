@@ -156,11 +156,25 @@
         <div id="tree-box">
             <ul id="dom-tree"></ul>
         </div>
+        <button id="hide-sidebar">✖ Hide Sidebar</button>
     </div>
-   
+   <button id="show-sidebar" class="show-sidebar">☰ Show Sidebar</button>
+
 
 </body>
 <script>
+const sidebar = document.querySelector(".sidebar");
+const hideBtn = document.getElementById("hide-sidebar");
+const showBtn = document.getElementById("show-sidebar");
+
+hideBtn.addEventListener("click", () => {
+  sidebar.classList.add("hidden");
+});
+
+showBtn.addEventListener("click", () => {
+  sidebar.classList.remove("hidden");
+});
+
 let elementCounter = 0;
 let selectedPlaceholder = null;
 

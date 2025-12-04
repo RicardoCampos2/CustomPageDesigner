@@ -59,7 +59,7 @@ flex-direction: row;
 }
 .block {
     position: relative;
-    
+    min-width: 100%;;
     height: auto;
     display: flex;
     gap: 1rem;
@@ -78,15 +78,7 @@ flex-direction: row;
 .block.vertical{
       flex-direction: row;
     }
-.block__img {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 6px;
-  flex: 0 0 120px;
-  display: block;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
+
 
 .block__content {
   width: 20%;
@@ -268,6 +260,28 @@ flex-direction: row;
   border: none;
   cursor: pointer;
 }
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.show-sidebar {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background-color: #f27d09;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none; /* hidden by default */
+}
+
+.sidebar.hidden + .show-sidebar {
+  display: block; /* show only when sidebar is hidden */
+}
+
 
 .main-content {
   flex: 1;
@@ -278,6 +292,7 @@ flex-direction: row;
 
 .container {
   width: 100%;
+  height: 100%;
   flex: 1;              
   display: flex;
   flex-direction: row;  
@@ -286,6 +301,8 @@ flex-direction: row;
   background: rgba(255,255,255,0.6);
   border-radius: 6px;
   box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
 }
 
 .container.vertical {
@@ -296,8 +313,9 @@ flex-direction: row;
 }
 
 .container img{
+  min-width: 10rem;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .add-placeholder {
   background: none;
@@ -310,8 +328,8 @@ flex-direction: row;
 }
 
 .add-placeholder img {
-  width: 2rem;
-  height: 2rem;
+  width: 50%;
+  height: 50%;
   pointer-events: none;
 }
 .add-placeholder.selected {
