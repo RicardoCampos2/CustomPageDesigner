@@ -318,6 +318,7 @@ flex-direction: row;
   height: 100%;
 }
 .add-placeholder {
+  width: 100%;
   background: none;
   border: none;
   cursor: pointer;
@@ -328,7 +329,7 @@ flex-direction: row;
 }
 
 .add-placeholder img {
-  width: 50%;
+  width: 20%;
   height: 50%;
   pointer-events: none;
 }
@@ -396,6 +397,8 @@ flex-direction: row;
 }
 
 
+
+
 @media (max-width: 1000px) {
   .main-content{
     width: 100%;
@@ -437,6 +440,9 @@ flex-direction: row;
   .sidebar{
     display: none;
     width: 0%;
+  }
+  .add-block-btn{
+    display: none;
   }
   .container{
     flex-direction: column;

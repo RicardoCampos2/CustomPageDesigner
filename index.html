@@ -3,6 +3,8 @@
 <head>
      <meta charset="UTF-8" />
      <link rel="stylesheet" type="text/css" href="style.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
      <title>Prueba :p</title>
 </head>
 <body>
@@ -156,185 +158,13 @@
         <div id="tree-box">
             <ul id="dom-tree"></ul>
         </div>
+        <button id="add-block-btn" class="add-block-btn">Add Block</button>
         <button id="hide-sidebar">✖ Hide Sidebar</button>
+ <button id="export-html-btn">Export HTML</button>
     </div>
    <button id="show-sidebar" class="show-sidebar">☰ Show Sidebar</button>
 
-
+ <script src="page.js"></script> 
 </body>
-<script>
-const sidebar = document.querySelector(".sidebar");
-const hideBtn = document.getElementById("hide-sidebar");
-const showBtn = document.getElementById("show-sidebar");
 
-hideBtn.addEventListener("click", () => {
-  sidebar.classList.add("hidden");
-});
-
-showBtn.addEventListener("click", () => {
-  sidebar.classList.remove("hidden");
-});
-
-let elementCounter = 0;
-let selectedPlaceholder = null;
-
-function generateId(type) {
-  elementCounter++;
-  return `${type}-${elementCounter}`;
-}
-
-// Select a placeholder when clicked
-document.addEventListener("click", function(e) {
-  if (e.target.closest(".add-placeholder")) {
-    if (selectedPlaceholder) {
-      selectedPlaceholder.classList.remove("selected");
-    }
-    selectedPlaceholder = e.target.closest(".add-placeholder");
-    selectedPlaceholder.classList.add("selected");
-  }
-});
-
-// Show/hide inputs based on sidebar dropdown
-document.getElementById("element-type").addEventListener("change", function() {
-  const type = this.value;
-  document.getElementById("element-text").style.display = (type === "text" || type === "title") ? "block" : "none";
-  document.getElementById("element-image").style.display = (type === "image") ? "block" : "none";
-});
-document.addEventListener("DOMContentLoaded", buildTree);
-
-// Insert element into selected placeholder
-function insertElement() {
-  if (!selectedPlaceholder) {
-    alert("Select a placeholder button inside a block first.");
-    return;
-  }
-
-  const type = document.getElementById("element-type").value;
-  const textVal = document.getElementById("element-text").value;
-  const fileInput = document.getElementById("element-image");
-
-  let newEl;
-
-  switch(type) {
-    case "title":
-      newEl = document.createElement("h2");
-      newEl.className = "block__title";
-      newEl.id = generateId("title");
-      newEl.textContent = textVal || "New Title";
-      break;
-
-    case "text":
-      newEl = document.createElement("p");
-      newEl.className = "block__text";
-      newEl.id = generateId("text");
-      newEl.textContent = textVal || "New Text";
-      break;
-
-    case "image":
-      newEl = document.createElement("img");
-      newEl.className = "block__img";
-      newEl.id = generateId("image");
-      if (fileInput.files[0]) {
-        newEl.src = URL.createObjectURL(fileInput.files[0]);
-      } else {
-        newEl.src = "img.jpg";
-      }
-      newEl.alt = "New Image";
-      break;
-
-    case "container":
-        newEl = document.createElement("div");
-        newEl.className = "container";
-        newEl.id = generateId("container");
-
-        // add the placeholder button inside
-        const placeholderBtn = document.createElement("button");
-        placeholderBtn.className = "add-placeholder";
-        placeholderBtn.innerHTML = '<img src="add.png" alt="Add">';
-        const placeholderBtn2 = document.createElement("button");
-        placeholderBtn2.className = "add-placeholder";
-        placeholderBtn2.innerHTML = '<img src="add.png" alt="Add">';
-        newEl.appendChild(placeholderBtn);
-        newEl.appendChild(placeholderBtn2);
-
-        break;
-  }
-
-  if (newEl) {
-    selectedPlaceholder.replaceWith(newEl);
-    buildTree();
-    selectedPlaceholder = null; // reset
-  }
-  
-}
-function buildTree() {
-  const treeRoot = document.getElementById("dom-tree");
-  treeRoot.innerHTML = "";
-
-  const mainContent = document.querySelector(".main-content");
-
- function createNode(el, parentUl) {
-
-  const li = document.createElement("li");
-
-  // header row
-  const header = document.createElement("div");
-  header.className = "tree-node";
-
-  const label = document.createElement("button");
-  label.textContent = `${el.className} (${el.id || "no-id"})`;
-  label.onclick = () => {
-    if (selectedPlaceholder) selectedPlaceholder.classList.remove("selected");
-    selectedPlaceholder = el;
-    el.classList.add("selected");
-  };
-
-  header.appendChild(label);
-  li.appendChild(header);
-  parentUl.appendChild(li);
-
-  // children
-  const children = el.querySelectorAll(":scope > .container, :scope > .block",);
-  const components = el.querySelectorAll(":scope > .block__text, :scope > .block__Title, :scope > .block__img",);
-  
-  if (children.length > 0) {
-    const toggle = document.createElement("span");
-    toggle.className = "tree-toggle";
-    header.insertBefore(toggle, label);
-    
-    const ul = document.createElement("ul");
-    li.appendChild(ul);
-
-    children.forEach(child => createNode(child, ul));
-
-    toggle.onclick = () => {
-      const isOpen = toggle.classList.toggle("open");
-      ul.classList.toggle("hidden", !isOpen);
-    };
-
-    ul.classList.add("hidden"); // start collapsed
-  }
-  if (components.length > 0) {
-    const toggle = document.createElement("span");
-    toggle.className = "tree-toggle";
-    header.insertBefore(toggle, label);
-    
-    const ul = document.createElement("ul");
-    li.appendChild(ul);
-
-    components.forEach(child => createNode(child, ul));
-
-    toggle.onclick = () => {
-      const isOpen = toggle.classList.toggle("open");
-      ul.classList.toggle("hidden", !isOpen);
-    };
-
-    ul.classList.add("hidden"); // start collapsed
-  }
-}
-
-  const blocks = mainContent.querySelectorAll(".block");
-  blocks.forEach(block => createNode(block, treeRoot));
-}
-</script>
 </html>
