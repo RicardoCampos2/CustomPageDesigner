@@ -16,129 +16,7 @@
         </div>
         <div class="division">Block </div>
         <!-- Block 1-->
-        <div id="block1" class="block" data-id="block1">
-            <div class="container" id="container1">
-                <div class="container"id="container1-1">
-                <button class="add-placeholder">
-                    <img src="add.png" alt="Add">
-                </button>
-                </div>
-                <div class="container vertical"id="container1-2">
-                <button class="add-placeholder">
-                    <img src="add.png" alt="Add">
-                </button>
-                <button class="add-placeholder">
-                    <img src="add.png" alt="Add">
-                </button>
-                </div>
-            </div>
-            <div class="container vertical" id="container2">
-                <button class="add-placeholder">
-                <img src="add.png" alt="Add">
-                </button>
-                <div class="container">
-                <button class="add-placeholder">
-                    <img src="add.png" alt="Add">
-                </button>
-                <button class="add-placeholder">
-                    <img src="add.png" alt="Add">
-                </button>
-                </div>
-            </div>
-        </div>
-        <div class="division">Block </div>
-        <!-- Block 2-->
-        <div class="block" data-id={id}>
-            <div class="block__content">
-                <h2 class="block__title">This is a block</h2>
-                <p class="block__text">content goes .</p>
-            </div>
-             <img src="img.jpg" alt="AAA" class="block__img" />
-        </div>
-        <div class="division">Block </div>
-        <!-- Block 3-->
-        <div class="block footer" data-id={id}>
-            <h2 class="block__title">This is a block</h2>
-            <div class="block__footer">
-                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                <p class="block__text">content goes .</p>
-            </div>
-            <div class="block__footer">
-                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                <p class="block__text">content goes .</p>
-            </div>
-            <div class="block__footer">
-                <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                <p class="block__text">content goes .</p>
-            </div>
-
-        </div>
-        <div class="division"></div>
-        <div class="block">
-            <h2 class="block__title">This is a block</h2>
-            <div class="carousel">
-                <!-- Radio buttons to control slides -->
-                <input type="radio" name="radio-btn" id="radio1" checked>
-                <input type="radio" name="radio-btn" id="radio2">
-                <input type="radio" name="radio-btn" id="radio3">
-
-                <!-- Slides wrapper -->
-                <div class="slides">
-                    <div class="slide">
-                        <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                         <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                          <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                    </div>
-                    <div class="slide">
-                         <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                         <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                          <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                    </div>
-                    <div class="slide">
-                         <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                         <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                          <div class="block__content">
-                            <img src="img.jpg" alt="AAA" class="block__imgfooter" />
-                            <p class="block__text">content goes .</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Manual navigation -->
-                <div class="navigation-manual">
-                    <label for="radio1" class="manual-btn"></label>
-                    <label for="radio2" class="manual-btn"></label>
-                    <label for="radio3" class="manual-btn"></label>
-                </div>
-            </div>
-        </div>
-        <div class="block">
-        <div class="block__title">Titulo</div>
-        </div>
+        
     </div>
     <div class="sidebar">
         <h3>Add Elements</h3>
@@ -150,6 +28,14 @@
             <option value="image">Image</option>
             <option value="container">Container</option>
         </select>
+        <select id="container-layout" style="display:none;">
+            <option value="single">Single Cell</option>
+            <option value="2-row">2 Cells in a Row</option>
+            <option value="3-row">3 Cells in a Row</option>
+            <option value="2-col">2 Cells in a Column</option>
+            <option value="3-col">3 Cells in a Column</option>
+            <option value="1-2-split">1 by 2 Split</option>
+        </select>
         <input type="text" id="element-text" placeholder="Enter text" style="display:none;" />
         <input type="file" id="element-image" accept="image/*" style="display:none;" />
         <button onclick="insertElement()">Insert Element</button>
@@ -158,6 +44,70 @@
         <div id="tree-box">
             <ul id="dom-tree"></ul>
         </div>
+
+        <div id="element-properties" style="display:none;">
+            <h3 id="selected-element-tag">Element Properties</h3>
+            <div class="property-group">
+                <label for="bg-color">Background Color:</label>
+                <input type="color" id="bg-color">
+            </div>
+            <div id="text-properties" style="display:none;">
+                <div class="property-group">
+                    <label for="font-color">Font Color:</label>
+                    <input type="color" id="font-color">
+                </div>
+                <div class="property-group">
+                    <label for="font-size">Font Size (px):</label>
+                    <input type="number" id="font-size" min="1">
+                </div>
+            <div class="property-group">
+                <label for="element-content">Text Content:</label>
+                <textarea id="element-content" rows="3"></textarea>
+            </div>
+            <div class="property-group">
+                <label for="text-align">Text Align</label>
+                <select id="text-align">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+        </div>
+        <div id="image-properties" style="display:none;">
+            <div class="property-group">
+                <label for="image-width">Width (px):</label>
+                <input type="number" id="image-width" min="1">
+            </div>
+            <div class="property-group">
+                <label for="image-height">Height (px):</label>
+                <input type="number" id="image-height" min="1">
+            </div>
+            <div class="property-group">
+                <label for="image-file-input">Change Image:</label>
+                <input type="file" id="image-file-input" accept="image/*">
+            </div>
+        </div>
+        <div id="layout-properties" style="display:none;">
+             <div class="property-group">
+                <label for="justify-content">Horizontal Alignment</label>
+                <select id="justify-content">
+                    <option value="flex-start">Left</option>
+                    <option value="center">Center</option>
+                    <option value="flex-end">Right</option>
+                </select>
+            </div>
+            <div class="property-group">
+                <label for="align-items">Vertical Alignment</label>
+                <select id="align-items">
+                    <option value="flex-start">Top</option>
+                    <option value="center">Center</option>
+                    <option value="flex-end">Bottom</option>
+                </select>
+            </div>
+            </div>
+            <button id="delete-element-btn">Delete Element</button>
+        </div>
+
         <button id="add-block-btn" class="add-block-btn">Add Block</button>
         <button id="hide-sidebar">✖ Hide Sidebar</button>
  <button id="export-html-btn">Export HTML</button>

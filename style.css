@@ -225,12 +225,13 @@ flex-direction: row;
   position: fixed;
   top: 0;
   left: 0;
-  width: 15%;
+  width: 280px;
+  height: 100%;
   padding: 1rem;
   background-color: #f4f4f4;
   border-right: 2px solid #ccc;
   box-sizing: border-box;
-  margin-left: 70;
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 .sidebar h3 {
@@ -288,6 +289,11 @@ flex-direction: row;
   padding: 1rem;
 }
 
+/* Add this to your style.css */
+.selected {
+  outline: 2px solid #007bff; /* A blue outline to show selection */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
 
 
 .container {
