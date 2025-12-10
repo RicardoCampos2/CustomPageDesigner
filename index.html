@@ -5,17 +5,46 @@
      <link rel="stylesheet" type="text/css" href="style.css">
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-     <title>Prueba :p</title>
+     <title>Page Designer</title>
 </head>
 <body>
     
     <div class="main-content">
-        <div class="top-banner">
-         <img src="cat.png" alt="AAA"  />
-         <h2>  This is the Header</h2>
+        <div class="top-banner" id="top-banner">
+         <img src="cat.png" alt="Header Image" id="header-img">
+         <h2 id="header-title">  This is the Header</h2>
         </div>
-        <div class="division">Block </div>
-        <!-- Block 1-->
+        <div class="division"></div>
+        <div class="block" id="block4" data-id="block4">
+            <div class="container" id="container-1" style="align-items: center;">
+                <img class="block__img" id="image-3" alt="New Image" src="images/img1.png" style="width: 432px;">
+                <div class="container vertical" id="container-2">
+                    <h2 class="block__title" id="title-4">New Title</h2>
+                    <p class="block__text" id="text-5" style="font-size: 23px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="division"></div>
+        <div class="block" id="block5" data-id="block5">
+            <div class="container vertical" id="container-6">
+                <h2 class="block__title" id="title-8" style="text-align: center; color: rgb(255, 26, 26);">New Title</h2>
+                <div class="container" id="container-7">
+                    <div class="container vertical" id="container-9">
+                        <img class="block__img" id="image-12" alt="New Image" src="images/img2.png">
+                        <p class="block__text" id="text-15">New Text</p>
+                    </div>
+                    <div class="container vertical" id="container-10">
+                        <img class="block__img" id="image-13" alt="New Image" src="images/img3.png">
+                        <p class="block__text" id="text-16">New Text</p>
+                    </div>
+                    <div class="container vertical" id="container-11">
+                        <img class="block__img" id="image-14" alt="New Image" src="images/img4.png">
+                        <p class="block__text" id="text-17">New Text</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="division"></div></div>
         
     </div>
     <div class="sidebar">
@@ -49,12 +78,19 @@
             <h3 id="selected-element-tag">Element Properties</h3>
             <div class="property-group">
                 <label for="bg-color">Background Color:</label>
-                <input type="color" id="bg-color">
+                <div class="color-picker-wrapper" id="bg-color-wrapper">
+                    <input type="color" id="bg-color">
+                </div>
+                <input type="range" id="bg-color-alpha" min="0" max="1" step="0.01" value="1">
+                
             </div>
             <div id="text-properties" style="display:none;">
                 <div class="property-group">
                     <label for="font-color">Font Color:</label>
-                    <input type="color" id="font-color">
+                    <div class="color-picker-wrapper" id="font-color-wrapper">
+                        <input type="color" id="font-color">
+                    </div>
+                    <input type="range" id="font-color-alpha" min="0" max="1" step="0.01" value="1">
                 </div>
                 <div class="property-group">
                     <label for="font-size">Font Size (px):</label>

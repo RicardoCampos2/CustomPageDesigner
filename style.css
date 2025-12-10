@@ -15,18 +15,24 @@ flex-direction: row;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 100%;
   padding: 1rem 1rem;
   background-color: #f27d09fe;
   border-radius: 6px;
   display: flex;
   flex-direction: row;
+  justify-items: center;
+  align-items: center;
   img {
     height: 100px;
   }
   h2 {
+
+
     margin: 2rem;
     font-size: 4rem;
+    --height: font-size;
+    height: 100%;
   }
 }
 
@@ -37,7 +43,7 @@ flex-direction: row;
 
     
     display: flex;
-    justify-items: f;
+    justify-items: center;
     align-items: center;
     flex-direction: column;
   box-sizing: border-box;
@@ -99,12 +105,11 @@ flex-direction: row;
   margin: 0 0 0.5rem 0;
   font-size: 4.5rem;
   line-height: 1.4;
-  border: 1px solid black;
+
 }
 
 .block__text {
   width: 100%;
-  border: 1px solid black;
   overflow-wrap: break-word;
   color: #555;
   font-size: 1.5rem;
@@ -283,6 +288,28 @@ flex-direction: row;
   display: block; /* show only when sidebar is hidden */
 }
 
+.property-group {
+  margin-bottom: 1rem;
+}
+
+.color-picker-wrapper {
+  position: relative;
+  width: 100%;
+  height: 38px; /* Same height as other inputs */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff; /* Default background */
+  cursor: pointer;
+}
+
+.color-picker-wrapper input[type="color"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Make the actual input invisible */
+}
 
 .main-content {
   flex: 1;
@@ -344,57 +371,75 @@ flex-direction: row;
   border-radius: 4px;
 }
 #tree-box {
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 0.5rem;
   background: #fff;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #dom-tree {
   list-style-type: none;
-  padding-left: 0.5rem;
+  padding-left: 0;
 }
 
 #dom-tree li {
-  margin: 0.2rem 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
 }
 
 .tree-node {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: start;
+  gap: 0.25rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.tree-node:hover {
+  background-color: #e9e9e9;
 }
 
 .tree-toggle {
   cursor: pointer;
-  font-weight: bold;
-  color: #f27d09;
+  width: 16px !important;
+  height: 16px;
+  display: inline-block;
+  text-align: center;
+  transition: transform 0.2s ease;
 }
 
 .tree-toggle::before {
-  content: "▶"; /* collapsed arrow */
+  content: '›';
+  font-size: 1.5em;
+  line-height: 0.8;
+  color: #555;
 }
 
 .tree-toggle.open::before {
-  content: "▼"; /* expanded arrow */
+  transform: rotate(90deg);
 }
 
 #dom-tree button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #333;
   text-align: left;
   padding: 0;
+  flex-grow: 1;
 }
 
 #dom-tree ul {
-  margin-left: 1rem;
-  padding-left: 0.5rem;
+  margin: 0;
+  padding-left: 20px;
   border-left: 1px dashed #ccc;
 }
 
@@ -402,34 +447,41 @@ flex-direction: row;
   display: none;
 }
 
+#dom-tree li.selected > .tree-node {
+  background-color: #cce5ff;
+  font-weight: bold;
+}
 
 
 
 @media (max-width: 1000px) {
   .main-content{
-    width: 100%;
+    width: 100% !important;
+  }
+  .top-banner h2{
+    font-size: 5rem !important;
   }
   .block {
-    flex-direction: column;
-    align-items: stretch;
-    width: 90%;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 90% !important;
 
   }
 
   .block__img {
-    width: 100%;
-    height: 80%;
+    width: 100% !important;
+    height: 80% !important;
     flex: 0 0 auto;
   }
   .block__title{
-  font-size: 6rem;
+  font-size: 8rem !important;
   }
   .block__text{
-    font-size: 3rem;
+    font-size: 2.5rem !important;
   }
   .block__content {
-    width: 100%;
-    padding-top: 0.5rem;
+    width: 100% !important;
+    padding-top: 0.5rem !important;
   }
  .carousel p{
   font-size: 2rem;
@@ -451,15 +503,15 @@ flex-direction: row;
     display: none;
   }
   .container{
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column !important;
+    width: 100% !important;
   }
-  .container.slected{
-    flex-direction: column;
-    width: 100%;
+  .container.selected{
+    flex-direction: column !important;
+    width: 100% !important;
   }
   .container.vertical{
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column !important;
+    width: 100% !important;
   }
 }
