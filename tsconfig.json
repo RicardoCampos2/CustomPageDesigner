@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "none",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": false,
+    "allowJs": false,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outFile": "./behaivour.js"
+  },
+  "include": ["./behaivour.ts"],
+  "exclude": ["node_modules"]
+}

@@ -73,22 +73,16 @@
         <div id="tree-box">
             <ul id="dom-tree"></ul>
         </div>
-        <button id="page-settings-btn">Page Settings</button>
 
         <div id="element-properties" style="display:none;">
             <h3 id="selected-element-tag">Element Properties</h3>
-            <!-- Page Properties Panel -->
-            <div id="page-properties" style="display:none;">
-                <!-- Content will be managed by TypeScript -->
-            </div>
-            <div id="generic-properties">
-                <div class="property-group">
-                    <label for="bg-color">Background Color:</label>
-                    <div class="color-picker-wrapper" id="bg-color-wrapper">
-                        <input type="color" id="bg-color">
-                    </div>
-                    <input type="range" id="bg-color-alpha" min="0" max="1" step="0.01" value="1">
+            <div class="property-group">
+                <label for="bg-color">Background Color:</label>
+                <div class="color-picker-wrapper" id="bg-color-wrapper">
+                    <input type="color" id="bg-color">
                 </div>
+                <input type="range" id="bg-color-alpha" min="0" max="1" step="0.01" value="1">
+                
             </div>
             <div id="text-properties" style="display:none;">
                 <div class="property-group">
@@ -146,24 +140,6 @@
                     <option value="flex-end">Bottom</option>
                 </select>
             </div>
-            </div>
-            <div id="page-properties-panel" style="display:none;">
-
-                <div class="property-group">
-                    <label for="page-title-input">Page Title:</label>
-                    <input type="text" id="page-title-input">
-                </div>
-                <div class="property-group">
-                    <label for="page-bg-color">Background Color:</label>
-                    <div class="color-picker-wrapper" id="page-bg-color-wrapper">
-                        <input type="color" id="page-bg-color" value="#ffffff">
-                    </div>
-                    <input type="range" id="page-bg-color-alpha" min="0" max="1" step="0.01" value="1">
-                </div>
-                <div class="property-group">
-                    <label for="page-favicon-input">Favicon:</label>
-                    <input type="file" id="page-favicon-input" accept="image/*">
-                </div>
             </div>
             <button id="delete-element-btn">Delete Element</button>
         </div>
