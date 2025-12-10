@@ -3,12 +3,10 @@ body, html {
   padding: 0;
   height: 100%;
   width: 100%;
-    background-color:#cbebf3;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 display: flex;
 justify-content: center;
 flex-direction: row;
- background: linear-gradient(135deg, rgba(237, 223, 212, 0.9), rgba(237, 232, 212, 0.7));
 
 }
 .top-banner {
