@@ -1,6 +1,3 @@
-// TypeScript version of page.js
-// Converted to TS with types while keeping exact same behavior
-
 declare const JSZip: any; // provided by included library at runtime
 
 const sidebar = document.querySelector(".sidebar") as HTMLElement;
@@ -226,7 +223,6 @@ function exportPage(): void {
   clonedContent.querySelectorAll(".sidebar").forEach((el) => el.remove());
   clonedContent.querySelectorAll(".selected").forEach((el) => el.classList.remove("selected"));
 
-  // Remove the 'selected' class from the body if it was selected for properties
   clonedContent.classList.remove('selected');
 
   // Explicitly set the computed background color of the body
@@ -236,21 +232,21 @@ function exportPage(): void {
   let faviconLinkHtml = '';
   let faviconFileName = '';
   let faviconBlobToZip: Blob | null = null;
-  let faviconPromise: Promise<void> = Promise.resolve(); // Initialize with a resolved promise
+  let faviconPromise: Promise<void> = Promise.resolve();
 
   if (faviconFile.file && faviconFile.dataUrl) {
     const ext = faviconFile.file.name.split(".").pop();
     faviconFileName = `favicon.${ext}`;
     faviconLinkHtml = `<link rel="icon" type="${faviconFile.file.type}" href="${faviconFileName}">`;
-    faviconBlobToZip = faviconFile.file; // Use the uploaded file directly
+    faviconBlobToZip = faviconFile.file;
   } else {
-    // Check if there's an existing favicon link in the original document
+
     const existingFavicon = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
     if (existingFavicon && existingFavicon.href && !existingFavicon.href.startsWith('data:')) {
       const faviconUrl = existingFavicon.href;
       const urlParts = faviconUrl.split('/');
-      faviconFileName = urlParts[urlParts.length - 1]; // Get filename from URL
-      // Try to infer type from URL or default to image/x-icon
+      faviconFileName = urlParts[urlParts.length - 1];
+
       const inferredType = faviconFileName.includes('.') ? `image/${faviconFileName.split('.').pop()}` : 'image/x-icon';
       faviconLinkHtml = `<link rel="icon" type="${inferredType}" href="${faviconFileName}">`;
 
